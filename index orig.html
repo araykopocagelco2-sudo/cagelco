@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAGELCO II Connect</title>
+    <link rel="icon" href="assets/img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <!-- WebFont Loader -->
+    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ["Roboto:300,400,500,700,900"], // Load Roboto from Google Fonts
+        },
+        custom: {
+          families: [
+            "Flaticon",
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+    <style>
+      body {
+        background-image: radial-gradient(
+            circle at 28% 51%,
+            rgba(206, 206, 206, 0.03) 0%,
+            rgba(206, 206, 206, 0.03) 17%,
+            transparent 17%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 45% 10%,
+            rgba(10, 10, 10, 0.03) 0%,
+            rgba(10, 10, 10, 0.03) 45%,
+            transparent 45%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 48% 44%,
+            rgba(74, 74, 74, 0.03) 0%,
+            rgba(74, 74, 74, 0.03) 84%,
+            transparent 84%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 47% 50%,
+            rgba(186, 186, 186, 0.03) 0%,
+            rgba(186, 186, 186, 0.03) 23%,
+            transparent 23%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 29% 70%,
+            rgba(9, 9, 9, 0.03) 0%,
+            rgba(9, 9, 9, 0.03) 32%,
+            transparent 32%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 2% 75%,
+            rgba(179, 179, 179, 0.03) 0%,
+            rgba(179, 179, 179, 0.03) 19%,
+            transparent 19%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 2% 36%,
+            rgba(26, 26, 26, 0.03) 0%,
+            rgba(26, 26, 26, 0.03) 1%,
+            transparent 1%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 53% 70%,
+            rgba(90, 90, 90, 0.03) 0%,
+            rgba(90, 90, 90, 0.03) 55%,
+            transparent 55%,
+            transparent 100%
+          ),
+          radial-gradient(
+            circle at 28% 92%,
+            rgba(31, 31, 31, 0.03) 0%,
+            rgba(31, 31, 31, 0.03) 35%,
+            transparent 35%,
+            transparent 100%
+          ),
+          linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
+      }
+      .welcome-screen {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow: hidden;
+        margin-top: -2cm;
+      }
+      .icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        color: orange; /* Icon color set to orange */
+        animation: bounce 1.5s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      .button-container {
+        display: flex;
+        justify-content: center; /* Centers content horizontally */
+        position: absolute;
+        bottom: 12%; /* Keeps the button near the bottom */
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .next-btn,
+      .finish-btn {
+        font-size: 0.875rem;
+        background-color: orangered;
+        border: none;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 40px;
+        width: 120px;
+        margin-left: 5px;
+      }
+      .next-btn:hover {
+        background-color: #fa560a;
+        color: #999;
+      }
+      .skip-btn {
+        font-size: 0.875rem;
+        background-color: #f8f9fa;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 40px;
+        width: 100px;
+        margin-right: 5px;
+      }
+      .skip-btn:hover {
+        background-color: #e2e6ea;
+        color: #000;
+      }
+
+      .finish-btn {
+        background-color: #000272;
+        color: white;
+        border: none;
+        font-size: 0.875rem;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 40px;
+        width: 120px;
+      }
+
+      .finish-btn:hover {
+        color: #999;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes slideIn {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      .page {
+        animation: fadeIn 0.5s ease-in-out both;
+      }
+      .slide-next {
+        animation: slideIn 0.5s ease-in both;
+      }
+      h2 {
+        font-size: 1.7rem;
+      }
+      p {
+        line-height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="welcomeScreen" class="welcome-screen visible">
+      <div class="container fade-in">
+        <!-- Skip Button (appears on all pages) -->
+        <!-- Page 1: Welcome -->
+        <div class="page" id="page1">
+          <i class="fas fa-bolt icon"></i>
+          <h2>Welcome to</h2>
+          <h2>CAGELCO II Connect</h2>
+          <p>
+            Stay connected with your electric service on the go! The CAGELCO App
+            allows you to easily check your latest electric bills, monitor your
+            usage history, and stay updated with your payments. You can also
+            file complaints and service requests directly through the app,
+            ensuring that your concerns are addressed quickly and efficiently.
+          </p>
+          <div class="button-container">
+            <button class="btn skip-btn" id="skipBtn">
+              <i class="icon-arrow-down-circle"></i>&nbsp;Skip
+            </button>
+            <button class="btn next-btn">
+              Next <i class="icon-arrow-right-circle"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Page 2: File Complaint -->
+        <div class="page" id="page2" style="display: none">
+          <i class="fas fa-exclamation-triangle icon"></i>
+          <h2>File a Complaint or Service Memo</h2>
+          <p>Easily file your complaints or service requests.</p>
+          <div class="button-container">           
+            <button class="btn next-btn">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Page 3: Latest News -->
+        <div class="page" id="page3" style="display: none">
+          <i class="fas fa-newspaper icon"></i>
+          <h2>Stay Updated with the Latest News</h2>
+          <p>
+            Get news and updates about services and improvements of our coop.
+          </p>
+          <div class="button-container">            
+            <button class="btn next-btn">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Page 4: Experience -->
+        <div class="page" id="page4" style="display: none">
+          <i class="fas fa-star icon"></i>
+          <h2>Make the most of our apps</h2>
+          <p>Access all your billing needs quickly and efficiently.</p>
+          <div class="button-container">
+            <button class="btn finish-btn">
+              Get Started <i class="fas fa-check"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("welcomeViewed")) {
+          // Redirect to main.php if the welcome screen has been viewed
+          window.location.href = "main.php";
+        } else {
+          let currentPage = 1;
+          const totalPage = 4;
+
+          const showPage = (page) => {
+            for (let i = 1; i <= totalPage; i++) {
+              document.getElementById(`page${i}`).style.display = "none";
+            }
+            document.getElementById(`page${page}`).style.display = "block";
+          };
+
+          const nextPage = () => {
+            if (currentPage < totalPage) {
+              currentPage++;
+              showPage(currentPage);
+            }
+          };
+
+          document.querySelectorAll(".next-btn").forEach((btn) => {
+            btn.addEventListener("click", nextPage);
+          });
+
+          document.querySelectorAll(".skip-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              localStorage.setItem("welcomeViewed", "true");
+              window.location.href = "main.php";
+            });
+          });
+
+          document
+            .querySelector(".finish-btn")
+            .addEventListener("click", () => {
+              localStorage.setItem("welcomeViewed", "true");
+              window.location.href = "main.php";
+            });
+
+          // Swipe functionality for mobile
+          let touchStartX = 0;
+          let touchEndX = 0;
+
+          const handleGesture = () => {
+            if (touchEndX < touchStartX) nextPage(); // Swipe left to go to next
+          };
+
+          document
+            .getElementById("welcomeScreen")
+            .addEventListener("touchstart", (e) => {
+              touchStartX = e.changedTouches[0].screenX;
+            });
+
+          document
+            .getElementById("welcomeScreen")
+            .addEventListener("touchend", (e) => {
+              touchEndX = e.changedTouches[0].screenX;
+              handleGesture();
+            });
+
+          showPage(currentPage);
+        }
+      });
+    </script>
+  </body>
+</html>
